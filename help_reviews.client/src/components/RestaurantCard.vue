@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <router-link :to="{name: 'RestaurantDetails', params:{restaurantId: restaurant.id}}">
-      <img class="rest-img" :src="restaurant.imgUrl" alt="">
+      <img class="rest-img rounded-top" :src="restaurant.imgUrl" alt="">
     </router-link>
     <h3 class="text-success">{{ restaurant.name }}</h3>
     <p>{{ restaurant.description }}</p>
@@ -30,5 +30,6 @@ export default {
 .rest-img{
   height: 45vh;
   object-fit: cover;
+  width: 100%;
 }
 </style>
