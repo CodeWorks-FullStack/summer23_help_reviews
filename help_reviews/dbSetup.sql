@@ -23,4 +23,4 @@ CREATE TABLE restaurants(
 
 
 INSERT INTO restaurants(name, imgUrl, description, creatorId)
-VALUES ('BIG B CHEESE', 'https://i.mmo.cm/is/image/mmoimg/mw-product-max/rat-snout--mw-103721-1.jpg', 'Come on down to Big B Cheese, and make sure you bring the whole family', '64e5595bb2e0f21b5b0b0254')
+VALUES ('CodFather', 'https://i.pinimg.com/1200x/43/fd/c1/43fdc1ff85c1d25872521d40e11ccd0c.jpg', 'Do you believe in cod? Because I reely trout it exists', '64e5595bb2e0f21b5b0b0254')
