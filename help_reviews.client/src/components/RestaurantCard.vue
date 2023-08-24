@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <router-link :to="{name: 'RestaurantDetails', params:{restaurantId: restaurant.id}}">
-      <img class="rest-img rounded-top" :src="restaurant.imgUrl" alt="">
+      <img class="rest-img rounded-top" :src="restaurant.imgUrl" :alt="restaurant.name" :title="`go see the details about ${restaurant.name}`">
     </router-link>
     <h3 class="text-success">{{ restaurant.name }}</h3>
     <p>{{ restaurant.description }}</p>

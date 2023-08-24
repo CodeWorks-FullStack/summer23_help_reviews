@@ -10,5 +10,8 @@ export const AppState = reactive({
   restaurants: [],
 
   /** @type {import('./models/Restaurant.js').Restaurant | null} */
-  restaurant: null
+  restaurant: null,
+
+  /** @type {import('./models/Report.js').Report[]} */
+  reports: []
 })
