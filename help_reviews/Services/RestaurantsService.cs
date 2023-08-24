@@ -19,6 +19,17 @@ public class RestaurantsService
     return restaurant;
   }
 
+  internal Restaurant GetRestaurantByIdAndIncreaseVisits(int restaurantId, string userId = null)
+  {
+    Restaurant restaurant = GetRestaurantById(restaurantId, userId);
+
+    restaurant.Visits++;
+
+    _restaurantsRepository.UpdateRestaurant(restaurant);
+
+    return restaurant;
+  }
+
   internal Restaurant GetRestaurantById(int restaurantId, string userId = null)
   {
     Restaurant restaurant = _restaurantsRepository.GetRestaurantById(restaurantId);

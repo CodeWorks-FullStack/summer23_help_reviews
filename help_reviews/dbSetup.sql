@@ -21,6 +21,18 @@ CREATE TABLE restaurants(
   FOREIGN KEY (creatorId) REFERENCES accounts(id) ON DELETE CASCADE
 )default charset utf8 COMMENT '';
 
+CREATE TABLE reports(
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
+  updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
+  title VARCHAR(30) NOT NULL,
+  body VARCHAR(150) NOT NULL,
+  restaurantId INT NOT NULL,
+  creatorId VARCHAR(255) NOT NULL,
+  FOREIGN KEY(restaurantId) REFERENCES restaurants(id) ON DELETE CASCADE,
+  FOREIGN KEY(creatorId) REFERENCES accounts(id) ON DELETE CASCADE
+)default charset utf8 COMMENT '';
+
 
 INSERT INTO restaurants(name, imgUrl, description, creatorId)
 VALUES ('BIG B CHEESE', 'https://i.mmo.cm/is/image/mmoimg/mw-product-max/rat-snout--mw-103721-1.jpg', 'Come on down to Big B Cheese, and make sure you bring the whole family', '64e5595bb2e0f21b5b0b0254')

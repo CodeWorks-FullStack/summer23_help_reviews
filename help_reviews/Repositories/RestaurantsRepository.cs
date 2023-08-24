@@ -1,5 +1,3 @@
-
-
 namespace help_reviews.Repositories;
 
 public class RestaurantsRepository
@@ -55,6 +53,7 @@ public class RestaurantsRepository
     acc.*
     FROM restaurants rest
     JOIN accounts acc ON acc.id = rest.creatorId
+    ORDER BY rest.name ASC
     ;";
 
     List<Restaurant> restaurants = _db.Query<Restaurant, Profile, Restaurant>(
@@ -77,6 +76,7 @@ public class RestaurantsRepository
     name = @Name,
     description = @Description,
     imgUrl = @ImgUrl,
+    visits = @Visits,
     isShutDown = @IsShutDown
     WHERE id = @Id
     ;";
