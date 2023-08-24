@@ -6,12 +6,14 @@ namespace help_reviews.Controllers;
 public class RestaurantsController : ControllerBase
 {
   private readonly RestaurantsService _restaurantsService;
+  private readonly ReportsService _reportsService;
   private readonly Auth0Provider _auth0Provider;
 
-  public RestaurantsController(RestaurantsService restaurantsService, Auth0Provider auth0Provider)
+  public RestaurantsController(RestaurantsService restaurantsService, Auth0Provider auth0Provider, ReportsService reportsService)
   {
     _restaurantsService = restaurantsService;
     _auth0Provider = auth0Provider;
+    _reportsService = reportsService;
   }
 
   [HttpPost]
@@ -37,7 +39,7 @@ public class RestaurantsController : ControllerBase
     try
     {
       Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
-      Restaurant restaurant = _restaurantsService.GetRestaurantById(restaurantId, userInfo?.Id);
+      Restaurant restaurant = _restaurantsService.GetRestaurantByIdAndIncreaseVisits(restaurantId, userInfo?.Id);
       return Ok(restaurant);
     }
     catch (Exception e)
@@ -45,6 +47,24 @@ public class RestaurantsController : ControllerBase
       return BadRequest(e.Message);
     }
   }
+
+  // NOTE would be useful for queries
+  // [HttpGet]
+  // public async Task<ActionResult<List<Restaurant>>> GetRestaurants([FromQuery] string name)
+  // {
+  //   try
+  //   {
+  //     // NOTE set this up to parameterize with dapper
+  //     // name = $"%{name}%";
+  //     Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+  //     List<Restaurant> restaurants = _restaurantsService.GetRestaurants(userInfo?.Id);
+  //     return Ok(restaurants);
+  //   }
+  //   catch (Exception e)
+  //   {
+  //     return BadRequest(e.Message);
+  //   }
+  // }
 
   [HttpGet]
   public async Task<ActionResult<List<Restaurant>>> GetRestaurants()
@@ -79,4 +99,19 @@ public class RestaurantsController : ControllerBase
     }
   }
 
+
+  [HttpGet("{restaurantId}/reports")]
+  public async Task<ActionResult<List<Report>>> GetReportsByRestaurantId(int restaurantId)
+  {
+    try
+    {
+      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+      List<Report> reports = _reportsService.GetReportsByRestaurantId(restaurantId, userInfo?.Id);
+      return Ok(reports);
+    }
+    catch (Exception e)
+    {
+      return BadRequest(e.Message);
+    }
+  }
 }
